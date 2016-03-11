@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: 2GIS IT
+  description: Role for PostgreSQL Backup and Restore manager -- barman
+  min_ansible_version: 2.0.0
+  license: LGPL
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  categories:
+    - database
+    - postgresql
+
+dependencies: []

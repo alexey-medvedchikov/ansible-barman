@@ -1,0 +1,51 @@
+---
+
+barman_packages:
+  - barman
+  - bzip2
+  - gzip
+  - xz-utils
+
+# barman_ssh_private_key must be set
+# barman_ssh_public_key must be set
+
+barman_user: barman
+barman_home: /var/lib/barman
+barman_lock_directory: "{{ barman_home }}"
+barman_log_file: /var/log/barman/barman.log
+barman_compression: gzip
+barman_custom_compression_filter: ""
+barman_custom_decompression_filter: ""
+barman_reuse_backup: "off"
+barman_pre_backup_script: /bin/true
+barman_pre_backup_retry_script: /bin/true
+barman_post_backup_retry_script: /bin/true
+barman_post_backup_script: /bin/true
+barman_pre_archive_script: /bin/true
+barman_pre_archive_retry_script: /bin/true
+barman_post_archive_retry_script: /bin/true
+barman_post_archive_script: /bin/true
+barman_configuration_files_directory: /etc/barman.d
+barman_minimum_redundancy: 1
+barman_retention_policy: ""
+barman_bandwidth_limit: 0
+barman_immediate_checkpoint: false
+barman_network_compression: false
+barman_backup_options: exclusive_backup
+barman_basebackup_retry_times: 0
+barman_basebackup_retry_sleep: 30
+barman_last_backup_maximum_age: ""
+
+# barman_servers:
+#   - name: main
+#     description: Main PostgreSQL Database
+#     ssh_command: ssh postgres@pg
+#     conn_host: pg
+#     conn_port: 5432
+#     conn_user: postgres
+#     conn_password: 1qa2ws3ed
+#     minimum_redundancy: "{{ barman_minimum_redundancy }}"
+#     retention_policy: ""
+
+barman_servers: []
+

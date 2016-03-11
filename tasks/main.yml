@@ -1,0 +1,7 @@
+---
+
+- include: install.yml
+  tags: [barman2, barman-install]
+
+- include: configure.yml
+  tags: [barman, barman-configure]

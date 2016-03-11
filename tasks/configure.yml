@@ -1,0 +1,65 @@
+---
+
+- name: add password to .pgpass file
+  lineinfile:
+    dest: "~{{ barman_user }}/.pgpass"
+    line: "{{ item.conn_host }}:{{ item.conn_port }}:*:{{ item.conn_user }}:{{ item.conn_password }}"
+    owner: "{{ barman_user }}"
+    create: yes
+    mode: 0600
+  with_items: "{{ barman_servers }}"
+
+- name: Create configuration files directory
+  file:
+    path: "{{ barman_configuration_files_directory }}"
+    state: directory
+
+- name: Divert barman main configuration file /etc/barman.conf
+  command: dpkg-divert --quiet --local --divert /etc/barman.conf.dpkg-divert --rename /etc/barman.conf
+  args:
+    creates: "/etc/barman.conf.dpkg-divert"
+
+- name: barman main configuration file /etc/barman.conf
+  template:
+    src: barman.conf.j2
+    dest: /etc/barman.conf
+    owner: "{{ barman_user }}"
+    mode: 0640
+
+- name: create ssh directory
+  file:
+    path: ~{{ barman_user }}/.ssh
+    owner: "{{ barman_user }}"
+    mode: 0755
+    state: directory
+
+- name: private ssh rsa key
+  copy:
+    dest: ~{{ barman_user }}/.ssh/id_rsa
+    owner: "{{ barman_user }}"
+    mode: 0600
+    content: "{{ barman_ssh_private_key | mandatory }}"
+
+- name: public ssh rsa key
+  copy:
+    dest: ~{{ barman_user }}/.ssh/id_rsa.pub
+    owner: "{{ barman_user }}"
+    mode: 0600
+    content: "{{ barman_ssh_public_key | mandatory }}"
+
+- name: ssh authorized keys
+  lineinfile:
+    dest: ~{{ barman_user }}/.ssh/authorized_keys
+    create: yes
+    owner: "{{ barman_user }}"
+    mode: 0600
+    line: "{{ barman_ssh_public_key | mandatory }}"
+
+- name: FIXME -- create incoming directory for wals
+  file:
+    path: "{{ barman_home }}/{{ item.name }}/incoming"
+    state: directory
+    owner: "{{ barman_user }}"
+    mode: 0700
+  with_items: "{{ barman_servers }}"
+
