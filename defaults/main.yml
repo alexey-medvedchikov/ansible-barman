@@ -28,6 +28,8 @@ barman_post_archive_script: /bin/true
 barman_configuration_files_directory: /etc/barman.d
 barman_minimum_redundancy: 1
 barman_retention_policy: ""
+barman_wal_retention_policy: "main"
+barman_retention_policy_mode: "auto"
 barman_bandwidth_limit: 0
 barman_immediate_checkpoint: false
 barman_network_compression: false
