@@ -45,6 +45,8 @@ minimum_redundancy = {{ barman_minimum_redundancy }}
 
 ; Global retention policy (REDUNDANCY or RECOVERY WINDOW) - default empty
 retention_policy = {{ barman_retention_policy }}
+wal_retention_policy = {{ barman_wal_retention_policy }}
+retention_policy_mode = {{ barman_retention_policy_mode }}
 
 ; Global bandwidth limit in KBPS - default 0 (meaning no limit)
 bandwidth_limit = {{ barman_bandwidth_limit }}
