@@ -51,3 +51,15 @@ barman_last_backup_maximum_age: ""
 
 barman_servers: []
 
+barman_backups_cron: []
+
+# barman_backups_cron:
+#   - name: main    # It's a barman backup server which we should backuping
+#     minute: 0     # Only this param is mandatory, other can be omitted
+#     hour: 2
+#     day: *
+#     month: *
+#     weekday: *
+#     disabled: false
+#
+## More information about cron: http://docs.ansible.com/ansible/cron_module.html
