@@ -3,6 +3,6 @@
 - name: install required barman packages
   apt:
     pkg: "{{ item }}"
-    state: latest
+    state: "{{ barman_package_state }}"
   with_items: "{{ barman_packages }}"
 

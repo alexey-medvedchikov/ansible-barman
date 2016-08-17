@@ -1,5 +1,7 @@
 ---
 
+barman_package_state: present
+
 barman_packages:
   - barman
   - bzip2
